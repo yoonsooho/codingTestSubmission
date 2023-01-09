@@ -1,16 +1,36 @@
 //1.
-const factory = function (param) {
+const factory = function (param, bread) {
   return {
     breadType: param.breadType,
     recipe: param.recipe,
     getInfo() {
-      return `
+      if (bread == "cream") {
+        return `
       bredType:${this.breadType}
       recipe 
        flour ${this.recipe.flour}
        water ${this.recipe.water}
-       cream ${this.recipe.cream}
+       ${bread} ${this.recipe.cream}
       `
+      }
+      if (bread == "sugar") {
+        return `
+      bredType:${this.breadType}
+      recipe 
+       flour ${this.recipe.flour}
+       water ${this.recipe.water}
+       ${bread} ${this.recipe.sugar}
+      `
+      }
+      if (bread == "butter") {
+        return `
+      bredType:${this.breadType}
+      recipe 
+       flour ${this.recipe.flour}
+       water ${this.recipe.water}
+       ${bread} ${this.recipe.butter}
+      `
+      }
     },
   }
 }
@@ -38,9 +58,26 @@ const data3 = {
     butter: 50,
   },
 }
-console.log(factory(data1).getInfo())
-console.log(factory(data2).getInfo())
-console.log(factory(data3).getInfo())
+console.log(factory(data1, "cream").getInfo())
+console.log(factory(data2, "sugar").getInfo())
+console.log(factory(data3, "butter").getInfo())
+// 1. 결과
+// bredType:cream
+// recipe
+// flour 100
+// water 100
+// cream 200
+
+// bredType:sugar
+//       recipe
+//        flour 100
+//        water 50
+//        sugar 200
+// bredType:butter
+//       recipe
+//        flour 100
+//        water 100
+//        butter 50
 //2.
 const result2 = {
   value: 2,
@@ -59,7 +96,7 @@ const result2 = {
   },
 }
 
-console.log(result2.add(5).subtract(2).out())
+console.log(result2.add(5).subtract(2).out()) //5
 
 //3.
 function result3(n) {
@@ -69,7 +106,7 @@ function result3(n) {
   return n * result3(n - 1)
 }
 
-console.log(result3(4))
+console.log(result3(4)) //24
 
 //4.
 // 발생원인
@@ -105,4 +142,4 @@ function result5() {
   }
   return state
 }
-console.log(result5())
+console.log(result5()) //[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 1, 1, 2, 3, 2, 1, 0, 0, 0, 0, 1, 2, 3, 4, 3, 2, 1, 1, 0, 0, 1, 2, 3, 4, 3, 3, 2, 1, 0, 0, 0, 1, 2, 3, 2, 2, 1, 0, 0, 0, 0, 0, 1, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
